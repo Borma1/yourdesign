@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Design - تصاميم أحذية</title>
+    <!-- Tailwind CSS CDN for modern and responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo for Arabic text, Inter for general/fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., WhatsApp icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base styles for body, setting font, text direction, background, and text color */
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif; /* Prioritize Cairo for Arabic text */
+            direction: rtl; /* Set overall text direction to Right-to-Left */
+            text-align: right; /* Align text to the right by default */
+            background-color: #f8fafc; /* Light blue-gray background */
+            color: #334155; /* Darker text color for better readability */
+        }
+        /* Custom styling for section titles with an underline effect */
+        .section-title {
+            position: relative; /* Needed for positioning the ::after pseudo-element */
+            display: inline-block; /* Allows width to fit content and applies padding */
+            padding-bottom: 8px; /* Space for the decorative underline */
+        }
+        .section-title::after {
+            content: ''; /* Required for pseudo-elements */
+            position: absolute; /* Position relative to the parent .section-title */
+            left: 0; /* Starts the underline from the left for RTL */
+            right: auto; /* Ensures it's not positioned from the right */
+            bottom: 0; /* Positions the underline at the bottom */
+            width: 60%; /* Sets the width of the underline */
+            height: 3px; /* Thickness of the underline */
+            background-color: #fca5a5; /* Light red color for the underline */
+            border-radius: 9999px; /* Makes the underline rounded */
+        }
+        /* Styling for the message box displayed after form submission */
+        .message-box {
+            display: none; /* Hidden by default, shown by JavaScript */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+        /* Success message styling */
+        .message-box.success {
+            background-color: #d1fae5; /* Light green background */
+            color: #065f46; /* Dark green text */
+        }
+        /* Error message styling (though not used in current JS, good practice) */
+        .message-box.error {
+            background-color: #fee2e2; /* Light red background */
+            color: #991b1b; /* Dark red text */
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header Section: Contains logo and navigation links -->
+    <header class="bg-white shadow-md p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Website Logo/Name -->
+            <a href="#" class="text-3xl font-bold text-gray-800">Your Design</a>
+
+            <!-- Mobile Menu Button (hamburger icon for small screens) -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Navigation Links for Desktop Screens -->
+            <nav class="hidden md:flex space-x-6 space-x-reverse"> <!-- space-x-reverse for RTL spacing -->
+                <a href="#hero" class="text-gray-600 hover:text-gray-900 transition duration-300">الرئيسية</a>
+                <a href="#designs" class="text-gray-600 hover:text-gray-900 transition duration-300">تصاميمنا</a>
+                <a href="#about" class="text-gray-600 hover:text-gray-900 transition duration-300">من نحن</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition duration-300">تواصل معنا</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Navigation Menu (hidden by default, toggled by JavaScript) -->
+        <nav id="mobile-menu" class="md:hidden mt-4 bg-gray-50 rounded-lg p-4 space-y-3 hidden">
+            <a href="#hero" class="block text-gray-700 hover:bg-gray-200 p-2 rounded-md transition duration-300">الرئيسية</a>
+            <a href="#designs" class="block text-gray-700 hover:bg-gray-200 p-2 rounded-md transition duration-300">تصاميمنا</a>
+            <a href="#about" class="block text-gray-700 hover:bg-gray-200 p-2 rounded-md transition duration-300">من نحن</a>
+            <a href="#contact" class="block text-gray-700 hover:bg-gray-200 p-2 rounded-md transition duration-300">تواصل معنا</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section: Main call to action and brand message with animations -->
+    <section id="hero" class="relative bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-20 px-4 rounded-b-lg shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 animate-fade-in-up">
+                <span class="block">Your Design</span>
+                <span class="block mt-2">تصاميم أحذية تُلهم خطوتك</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up delay-200">
+                اكتشف الفن في كل خطوة مع تصاميمنا الفريدة والمبتكرة للأحذية.
+            </p>
+            <a href="#designs" class="bg-white text-indigo-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                شاهد التصاميم الآن <i class="fas fa-arrow-left mr-2"></i> <!-- Arrow for RTL -->
+            </a>
+        </div>
+    </section>
+
+    <!-- Designs Section: Displays shoe designs in a grid layout -->
+    <section id="designs" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-10 text-center section-title">أحدث التصاميم</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Design Card 1: Example shoe design (Replace src with your actual image paths) -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                    <img src="https://placehold.co/600x400/94a3b8/FFFFFF?text=تصميم+رياضي" alt="تصميم حذاء رياضي عصري" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">حذاء رياضي عصري</h3>
+                        <p class="text-gray-600 mb-4">تصميم مبتكر يجمع بين الأداء والراحة بلمسة عصرية.</p>
+                        <button class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Design Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                    <img src="https://placehold.co/600x400/6b7280/FFFFFF?text=تصميم+كلاسيكي" alt="تصميم حذاء كلاسيكي أنيق" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">حذاء كلاسيكي أنيق</h3>
+                        <p class="text-gray-600 mb-4">تصميم خالد يعكس الفخامة والرقي، مثالي للمناسبات الرسمية.</p>
+                        <button class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Design Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                    <img src="https://placehold.co/600x400/a3e635/FFFFFF?text=تصميم+نسائي" alt="تصميم حذاء نسائي صيفي" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">حذاء نسائي صيفي</h3>
+                        <p class="text-gray-600 mb-4">تصميم خفيف ومريح بألوان زاهية، مثالي لأيام الصيف المشمسة.</p>
+                        <button class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Design Card 4 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                    <img src="https://placehold.co/600x400/fcd34d/FFFFFF?text=تصميم+كاجوال" alt="تصميم حذاء كاجوال يومي" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">حذاء كاجوال يومي</h3>
+                        <p class="text-gray-600 mb-4">تصميم عملي ومريح للاستخدام اليومي، بلمسة عصرية.</p>
+                        <button class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Design Card 5 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                    <img src="https://placehold.co/600x400/fbbf24/FFFFFF?text=تصميم+رياضي+جري" alt="تصميم حذاء جري احترافي" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">حذاء جري احترافي</h3>
+                        <p class="text-gray-600 mb-4">مصمم خصيصًا للجري، يوفر دعمًا وراحة لا مثيل لهما.</p>
+                        <button class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Design Card 6 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+                    <img src="https://placehold.co/600x400/c084fc/FFFFFF?text=تصميم+أحذية+رسمية" alt="تصميم حذاء رسمي فاخر" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">حذاء رسمي فاخر</h3>
+                        <p class="text-gray-600 mb-4">تصميم يعكس الذوق الرفيع، مثالي لرجال الأعمال.</p>
+                        <button class="bg-indigo-500 text-white px-5 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section: Information about Your Design -->
+    <section id="about" class="bg-gray-100 py-16 px-4">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-10 section-title">من نحن</h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl leading-relaxed mb-6">
+                    في Your Design، نؤمن بأن الأحذية ليست مجرد غطاء للقدمين، بل هي تعبير عن الشخصية والفن. نحن فريق من المصممين المبدعين والمتحمسين، نكرس جهودنا لتقديم تصاميم أحذية فريدة ومبتكرة تجمع بين الجمال، الراحة، والجودة.
+                </p>
+                <p class="text-lg md:text-xl leading-relaxed">
+                    منذ التأسيس، كان هدفنا هو إعادة تعريف تجربة الأحذية، وتحويلها إلى تحفة فنية تستحق أن تتباهى بها. كل تصميم لدينا يحمل قصة، من وحي الإلهام وصولًا إلى أدق التفاصيل.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section: Provides contact options for visitors -->
+    <section id="contact" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-10 text-center section-title">تواصل معنا</h2>
+            <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <p class="text-gray-700 text-lg mb-6 text-center">
+                    لديك استفسار أو ترغب بطلب تصميم خاص؟ نحن هنا لخدمتك!
+                </p>
+
+                <!-- WhatsApp Button: Direct link to send a message via WhatsApp -->
+                <a href="https://wa.me/201153756309?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%B5%D8%A7%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B0%D9%8A%D8%A9%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20Your%20Design." target="_blank" class="flex items-center justify-center bg-green-500 text-white font-bold py-3 px-6 rounded-full w-full hover:bg-green-600 transition duration-300 mb-6 shadow-md">
+                    <i class="fab fa-whatsapp text-2xl ml-3"></i>
+                    تواصل عبر واتساب
+                </a>
+
+                <!-- Email Contact Form: For general inquiries -->
+                <p class="text-gray-700 text-lg mb-6 text-center">
+                    أو املأ النموذج أدناه لإرسال رسالة بريد إلكتروني إلى <span class="font-bold text-indigo-600">yourdesignborma@gmail.com</span>:
+                </p>
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">الاسم:</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">البريد الإلكتروني:</label>
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">رسالتك:</label>
+                        <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                    </div>
+                    <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-full w-full hover:bg-indigo-700 transition duration-300">
+                        إرسال الرسالة
+                    </button>
+                    <!-- Message box for form submission status feedback -->
+                    <div id="form-message" class="message-box"></div>
+                </form>
+                <p class="text-sm text-gray-500 mt-4 text-center">
+                    **ملاحظة هامة:** لإرسال رسائل هذا النموذج بالفعل إلى <span class="font-bold text-indigo-600">yourdesignborma@gmail.com</span>، ستحتاج إلى ربط النموذج بخدمة خارجية مثل <a href="https://formspree.io/" target="_blank" class="text-indigo-500 hover:underline">Formspree.io</a> أو استخدام ميزات <a href="https://www.netlify.com/products/forms/" target="_blank" class="text-indigo-500 hover:underline">Netlify Forms</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section: Copyright and social media links -->
+    <footer class="bg-gray-800 text-white py-8 px-4 rounded-t-lg shadow-inner">
+        <div class="container mx-auto text-center">
+            <p class="mb-4">&copy; 2025 Your Design. جميع الحقوق محفوظة.</p>
+            <div class="flex justify-center space-x-4 space-x-reverse">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-twitter text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f text-2xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // JavaScript for mobile menu toggle functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden'); // Toggles visibility of mobile menu
+        });
+
+        // Close mobile menu when a navigation link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden'); // Hides the mobile menu
+            });
+        });
+
+        // JavaScript for smooth scrolling when clicking on anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevents default jump behavior
+
+                // Scrolls to the target section smoothly
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // JavaScript for client-side form submission simulation (for static sites)
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevents the browser's default form submission
+
+            // This part simulates a successful submission for demonstration purposes.
+            // In a real application, you would connect this form to a backend service
+            // like Formspree or Netlify Forms to actually send emails.
+
+            formMessage.classList.remove('error'); // Remove error styling if present
+            formMessage.classList.add('success'); // Add success styling
+            formMessage.textContent = 'شكرًا لك! تم استلام رسالتك بنجاح وسنتواصل معك قريبًا عبر البريد الإلكتروني.';
+            formMessage.style.display = 'block'; // Show the success message
+
+            // Reset the form fields after a short delay and hide the message
+            setTimeout(() => {
+                contactForm.reset(); // Clears form inputs
+                formMessage.style.display = 'none'; // Hides the message
+            }, 3000);
+        });
+    </script>
+</body>
+                  </html>
